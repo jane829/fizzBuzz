@@ -1,40 +1,28 @@
 package org.github.jane829.fizzbuzz;
 
+import java.util.List;
+
 public class FizzBuzz
 {
-    private String result;
+
+    private List<Rule> rules;
+
+    public FizzBuzz(List<Rule> rules)
+    {
+        this.rules = rules;
+    }
 
     public String handle(int input)
     {
-        if (input == 0) {
-            throw new IllegalArgumentException();
-        }
+        String result = String.valueOf(input);
 
-        result = String.valueOf(input);
-
-        if (isMultipleOfThreeAndFive(input)) {
-            result = "FizzBuzz";
-        } else if (isMultipleOfThree(input)) {
-            result = "Fizz";
-        } else if (isMultipleOfFive(input)) {
-            result = "Buzz";
+        for (Rule rule : rules) {
+            if(rule.isApplicable(input)){
+                return rule.getResult();
+            }
         }
 
         return result;
     }
 
-    private boolean isMultipleOfThreeAndFive(int input)
-    {
-        return input % 3 == 0 && input % 5 == 0;
-    }
-
-    private boolean isMultipleOfFive(int input)
-    {
-        return input % 5 == 0;
-    }
-
-    private boolean isMultipleOfThree(int input)
-    {
-        return input % 3 == 0;
-    }
 }
