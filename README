@@ -1,0 +1,10 @@
+this project trying to redefine the data 
+1, divided by 3, called Fizz
+2, divided by 5, called Buzz
+3, divided by 3 & 5, called FizzBuzz
+ 
+in 1-100. 
+
+Here we adopt TDD to develop this project , and finally we will 
+use Continous Integrade.
+
