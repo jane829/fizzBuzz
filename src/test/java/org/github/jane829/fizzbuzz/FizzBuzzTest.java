@@ -2,12 +2,13 @@ package org.github.jane829.fizzbuzz;
 
 import org.github.jane829.fizzbuzz.exception.NumberIsNotDigitalException;
 import org.github.jane829.fizzbuzz.exception.NumberNotBiggerThanZeroException;
+import org.github.jane829.fizzbuzz.invalidInputHandle.InValidInputDigtalHanlder;
+import org.github.jane829.fizzbuzz.invalidInputHandle.InvalidInputStrHander;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
 
-import static junit.framework.TestCase.fail;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -22,11 +23,12 @@ public class FizzBuzzTest
     public void setUp() throws Exception
     {
 
-        this.fizzBuzz = new FizzBuzz(Arrays.asList(new FizzBuzzRule(), new BuzzRule(), new FizzRule()));
+        this.fizzBuzz = new FizzBuzz(Arrays.asList(new FizzBuzzRule(), new BuzzRule(), new FizzRule()),
+                Arrays.asList(new InValidInputDigtalHanlder(), new InvalidInputStrHander()));
     }
 
     @Test
-    public void should_return_1_if_input1() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_return_1_if_input1() throws Throwable
     {
         // given
         String input = "1";
@@ -39,7 +41,7 @@ public class FizzBuzzTest
     }
 
     @Test
-    public void should_return_2_if_input2() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_return_2_if_input2() throws Throwable
     {
         // given
         String input = "2";
@@ -52,7 +54,7 @@ public class FizzBuzzTest
     }
 
     @Test
-    public void should_return_fizz_if_input3() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_return_fizz_if_input3() throws Throwable
     {
 
         // given
@@ -66,7 +68,7 @@ public class FizzBuzzTest
     }
 
     @Test
-    public void should_return_fizz_if_input6() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_return_fizz_if_input6() throws Throwable
     {
         //given
         String input = "6";
@@ -79,7 +81,7 @@ public class FizzBuzzTest
     }
 
     @Test
-    public void should_return_buzz_if_input5() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_return_buzz_if_input5() throws Throwable
     {
         // given
         String input = "5";
@@ -92,7 +94,7 @@ public class FizzBuzzTest
     }
 
     @Test
-    public void should_return_buzz_if_input10() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_return_buzz_if_input10() throws Throwable
     {
         // given
         String input = "10";
@@ -105,7 +107,7 @@ public class FizzBuzzTest
     }
 
     @Test
-    public void should_return_fizzbuzz_if_input15() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_return_fizzbuzz_if_input15() throws Throwable
     {
         //given
         String input = "15";
@@ -118,7 +120,7 @@ public class FizzBuzzTest
     }
 
     @Test
-    public void should_return_fizzbuzz_if_input30() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_return_fizzbuzz_if_input30() throws Throwable
     {
         // given
         String input = "30";
@@ -126,12 +128,12 @@ public class FizzBuzzTest
         // when
         String result = fizzBuzz.handle(input);
 
-        // then 
+        // then
         assertThat(result, is("FizzBuzz"));
     }
 
     @Test
-    public void should_throw_exception_if_input_is_0() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_throw_exception_if_input_is_0() throws Throwable
     {
 
         thrown.expect(NumberNotBiggerThanZeroException.class);
@@ -142,7 +144,7 @@ public class FizzBuzzTest
     }
 
     @Test
-    public void should_throw_exception_if_input_is_smaller_than_0() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_throw_exception_if_input_is_smaller_than_0() throws Throwable
     {
         thrown.expect(NumberNotBiggerThanZeroException.class);
 
@@ -152,7 +154,7 @@ public class FizzBuzzTest
     }
 
     @Test
-    public void should_throw_exception_if_input_is_not_digtal() throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public void should_throw_exception_if_input_is_not_digtal() throws Throwable
     {
         thrown.expect(NumberIsNotDigitalException.class);
 

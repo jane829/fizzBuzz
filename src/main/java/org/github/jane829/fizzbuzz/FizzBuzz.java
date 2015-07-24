@@ -1,22 +1,24 @@
 package org.github.jane829.fizzbuzz;
 
-import org.github.jane829.fizzbuzz.exception.NumberIsNotDigitalException;
-import org.github.jane829.fizzbuzz.exception.NumberNotBiggerThanZeroException;
+import org.github.jane829.fizzbuzz.invalidInputHandle.InValidInputHandler;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class FizzBuzz
 {
 
     private List<Rule> rules;
 
-    public FizzBuzz(List<Rule> rules)
+    private List<InValidInputHandler> handlers;
+
+    public FizzBuzz(List<Rule> rules, List<InValidInputHandler> handlers)
     {
         this.rules = rules;
+
+        this.handlers = handlers;
     }
 
-    public String handle(String input) throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    public String handle(String input) throws Throwable
     {
 
 
@@ -27,7 +29,9 @@ public class FizzBuzz
         String result = String.valueOf(inputData);
 
         for (Rule rule : rules) {
+
             if (rule.isApplicable(inputData)) {
+
                 return rule.getResult();
             }
         }
@@ -35,18 +39,12 @@ public class FizzBuzz
         return result;
     }
 
-    private void checkIfInputIsIllegal(String input) throws NumberNotBiggerThanZeroException, NumberIsNotDigitalException
+    private void checkIfInputIsIllegal(String input) throws Throwable
     {
 
-        Pattern pattern = Pattern.compile("[0-9]*");
-        if (!pattern.matcher(input).matches() && !input.startsWith("-")) {
+        for(InValidInputHandler invalidInputHandler : handlers) {
 
-            throw new NumberIsNotDigitalException("number should be digtal");
-
-        } else {
-            if (Integer.valueOf(input) <= 0) {
-                throw new NumberNotBiggerThanZeroException("number should be bigger than 0");
-            }
+            invalidInputHandler.handleInvalidInput(input);
         }
     }
 
