@@ -1,5 +1,6 @@
 package org.github.jane829.fizzbuzz;
 
+import org.github.jane829.fizzbuzz.exception.NumberInvalidException;
 import org.github.jane829.fizzbuzz.validator.NumberValidator;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class InputValidator
         this.handlers = handlers;
     }
 
-    void validate(String input) throws Throwable
+    void validate(String input) throws NumberInvalidException
     {
         for (NumberValidator numberValidator : handlers) {
             numberValidator.validate(input);

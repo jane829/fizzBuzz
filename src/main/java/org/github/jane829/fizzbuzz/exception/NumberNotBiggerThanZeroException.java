@@ -1,6 +1,6 @@
 package org.github.jane829.fizzbuzz.exception;
 
-public class NumberNotBiggerThanZeroException extends Throwable
+public class NumberNotBiggerThanZeroException extends NumberInvalidException
 {
     public NumberNotBiggerThanZeroException() {
         super();

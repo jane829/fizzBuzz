@@ -1,5 +1,6 @@
 package org.github.jane829.fizzbuzz.validator;
 
+import org.github.jane829.fizzbuzz.exception.NumberInvalidException;
 import org.github.jane829.fizzbuzz.exception.NumberIsNotDigitalException;
 import org.github.jane829.fizzbuzz.exception.NumberNotBiggerThanZeroException;
 
@@ -9,7 +10,7 @@ import static java.lang.Integer.parseInt;
 public class PositiveNumberValidator extends NumberValidator
 {
     @Override
-    public void validate(String input) throws Throwable
+    public void validate(String input) throws NumberInvalidException
     {
         try {
             if (parseInt(input) <= 0) {

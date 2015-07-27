@@ -1,6 +1,6 @@
 package org.github.jane829.fizzbuzz.exception;
 
-public class NumberIsNotDigitalException extends Throwable
+public class NumberIsNotDigitalException extends NumberInvalidException
 {
     public NumberIsNotDigitalException() {
         super();

@@ -1,5 +1,6 @@
 package org.github.jane829.fizzbuzz;
 
+import org.github.jane829.fizzbuzz.exception.NumberInvalidException;
 import org.github.jane829.fizzbuzz.exception.NumberIsNotDigitalException;
 import org.github.jane829.fizzbuzz.exception.NumberNotBiggerThanZeroException;
 import org.github.jane829.fizzbuzz.exception.NumberShouldSmallerThanHundredException;
@@ -34,7 +35,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_return_1_if_input1() throws Throwable
+    public void should_return_1_if_input1() throws NumberInvalidException
     {
         // given
         String input = "1";
@@ -47,7 +48,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_return_2_if_input2() throws Throwable
+    public void should_return_2_if_input2() throws NumberInvalidException
     {
         // given
         String input = "2";
@@ -60,7 +61,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_return_fizz_if_input3() throws Throwable
+    public void should_return_fizz_if_input3() throws NumberInvalidException
     {
 
         // given
@@ -74,7 +75,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_return_fizz_if_input6() throws Throwable
+    public void should_return_fizz_if_input6() throws NumberInvalidException
     {
         //given
         String input = "6";
@@ -87,7 +88,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_return_buzz_if_input5() throws Throwable
+    public void should_return_buzz_if_input5() throws NumberInvalidException
     {
         // given
         String input = "5";
@@ -100,7 +101,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_return_buzz_if_input10() throws Throwable
+    public void should_return_buzz_if_input10() throws NumberInvalidException
     {
         // given
         String input = "10";
@@ -113,7 +114,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_return_fizzbuzz_if_input15() throws Throwable
+    public void should_return_fizzbuzz_if_input15() throws NumberInvalidException
     {
         //given
         String input = "15";
@@ -126,7 +127,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_return_fizzbuzz_if_input30() throws Throwable
+    public void should_return_fizzbuzz_if_input30() throws NumberInvalidException
     {
         // given
         String input = "30";
@@ -139,7 +140,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_throw_exception_if_input_is_0() throws Throwable
+    public void should_throw_exception_if_input_is_0() throws NumberInvalidException
     {
 
         thrown.expect(NumberNotBiggerThanZeroException.class);
@@ -150,7 +151,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_throw_exception_if_input_is_smaller_than_0() throws Throwable
+    public void should_throw_exception_if_input_is_smaller_than_0() throws NumberInvalidException
     {
         thrown.expect(NumberNotBiggerThanZeroException.class);
 
@@ -160,7 +161,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_throw_exception_if_input_is_not_digital() throws Throwable
+    public void should_throw_exception_if_input_is_not_digital() throws NumberInvalidException
     {
         thrown.expect(NumberIsNotDigitalException.class);
 
@@ -169,7 +170,7 @@ public class ApplicationRunnerTest
     }
 
     @Test
-    public void should_throw_input_is_smaller_than_100() throws Throwable
+    public void should_throw_input_is_smaller_than_100() throws NumberInvalidException
     {
         thrown.expect(NumberShouldSmallerThanHundredException.class);
 
