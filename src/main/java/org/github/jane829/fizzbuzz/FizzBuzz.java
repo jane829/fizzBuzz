@@ -1,6 +1,6 @@
 package org.github.jane829.fizzbuzz;
 
-import org.github.jane829.fizzbuzz.invalidInputHandle.InValidInputHandler;
+import org.github.jane829.fizzbuzz.validator.NumberValidator;
 
 import java.util.List;
 
@@ -9,12 +9,11 @@ public class FizzBuzz
 
     private List<Rule> rules;
 
-    private List<InValidInputHandler> handlers;
+    private List<NumberValidator> handlers;
 
-    public FizzBuzz(List<Rule> rules, List<InValidInputHandler> handlers)
+    public FizzBuzz(List<Rule> rules, List<NumberValidator> handlers)
     {
         this.rules = rules;
-
         this.handlers = handlers;
     }
 
@@ -29,9 +28,7 @@ public class FizzBuzz
         String result = String.valueOf(inputData);
 
         for (Rule rule : rules) {
-
             if (rule.isApplicable(inputData)) {
-
                 return rule.getResult();
             }
         }
@@ -42,13 +39,10 @@ public class FizzBuzz
     private void checkIfInputIsIllegal(String input) throws Throwable
     {
 
-        for(InValidInputHandler invalidInputHandler : handlers) {
-
-            invalidInputHandler.handleInvalidInput(input);
+        for (NumberValidator numberValidator : handlers) {
+            numberValidator.validate(input);
         }
     }
-
-
 
 
 }

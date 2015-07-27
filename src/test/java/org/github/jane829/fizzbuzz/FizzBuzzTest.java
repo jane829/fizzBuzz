@@ -1,9 +1,11 @@
 package org.github.jane829.fizzbuzz;
 
+import org.github.jane829.fizzbuzz.exception.NumberShouldSmallerThanHundredException;
 import org.github.jane829.fizzbuzz.exception.NumberIsNotDigitalException;
 import org.github.jane829.fizzbuzz.exception.NumberNotBiggerThanZeroException;
-import org.github.jane829.fizzbuzz.invalidInputHandle.InValidInputDigtalHanlder;
-import org.github.jane829.fizzbuzz.invalidInputHandle.InvalidInputStrHander;
+import org.github.jane829.fizzbuzz.validator.LessThanHundredPositiveNumberValidator;
+import org.github.jane829.fizzbuzz.validator.PositiveNumberValidator;
+import org.github.jane829.fizzbuzz.validator.DigitalNumberValidator;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
@@ -20,11 +22,12 @@ public class FizzBuzzTest
     public ExpectedException thrown = ExpectedException.none();
 
     @Before
-    public void setUp() throws Exception
+    public void setUp()
     {
 
         this.fizzBuzz = new FizzBuzz(Arrays.asList(new FizzBuzzRule(), new BuzzRule(), new FizzRule()),
-                Arrays.asList(new InValidInputDigtalHanlder(), new InvalidInputStrHander()));
+                Arrays.asList(new PositiveNumberValidator(),
+                        new LessThanHundredPositiveNumberValidator()));
     }
 
     @Test
@@ -160,5 +163,15 @@ public class FizzBuzzTest
 
         // when
         fizzBuzz.handle("a");
+    }
+
+    @Test
+    public void should_throw_input_is_smaller_than_100() throws Throwable
+    {
+        thrown.expect(NumberShouldSmallerThanHundredException.class);
+
+        //when
+        fizzBuzz.handle("101");
+
     }
 }
