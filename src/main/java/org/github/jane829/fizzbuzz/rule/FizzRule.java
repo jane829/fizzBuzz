@@ -1,4 +1,4 @@
-package org.github.jane829.fizzbuzz;
+package org.github.jane829.fizzbuzz.rule;
 
 public class FizzRule extends Rule
 {
@@ -12,8 +12,8 @@ public class FizzRule extends Rule
     }
 
     @Override
-    public boolean isApplicable(int input)
+    public boolean isApplicable(String input)
     {
-        return input % FIZZ_FACTOR == 0;
+        return Integer.parseInt(input) % FIZZ_FACTOR == 0;
     }
 }

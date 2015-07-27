@@ -1,12 +1,15 @@
 package org.github.jane829.fizzbuzz;
 
-import org.github.jane829.fizzbuzz.exception.NumberShouldSmallerThanHundredException;
 import org.github.jane829.fizzbuzz.exception.NumberIsNotDigitalException;
 import org.github.jane829.fizzbuzz.exception.NumberNotBiggerThanZeroException;
+import org.github.jane829.fizzbuzz.exception.NumberShouldSmallerThanHundredException;
+import org.github.jane829.fizzbuzz.rule.BuzzRule;
+import org.github.jane829.fizzbuzz.rule.FizzBuzzRule;
+import org.github.jane829.fizzbuzz.rule.FizzRule;
 import org.github.jane829.fizzbuzz.validator.LessThanHundredPositiveNumberValidator;
 import org.github.jane829.fizzbuzz.validator.PositiveNumberValidator;
-import org.github.jane829.fizzbuzz.validator.DigitalNumberValidator;
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Arrays;
@@ -14,10 +17,10 @@ import java.util.Arrays;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class FizzBuzzTest
+public class ApplicationRunnerTest
 {
 
-    private FizzBuzz fizzBuzz;
+    private ApplicationRunner applicationRunner;
     @org.junit.Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -25,9 +28,9 @@ public class FizzBuzzTest
     public void setUp()
     {
 
-        this.fizzBuzz = new FizzBuzz(Arrays.asList(new FizzBuzzRule(), new BuzzRule(), new FizzRule()),
-                Arrays.asList(new PositiveNumberValidator(),
-                        new LessThanHundredPositiveNumberValidator()));
+        this.applicationRunner = new ApplicationRunner(
+                new InputValidator(Arrays.asList(new PositiveNumberValidator(), new LessThanHundredPositiveNumberValidator())),
+                new AnswerGenerator(Arrays.asList(new FizzBuzzRule(), new BuzzRule(), new FizzRule())));
     }
 
     @Test
@@ -37,7 +40,7 @@ public class FizzBuzzTest
         String input = "1";
 
         // when
-        String result = fizzBuzz.handle(input);
+        String result = applicationRunner.handle(input);
 
         // then
         assertThat(result, is("1"));
@@ -50,7 +53,7 @@ public class FizzBuzzTest
         String input = "2";
 
         // when
-        String result = fizzBuzz.handle(input);
+        String result = applicationRunner.handle(input);
 
         // then
         assertThat(result, is("2"));
@@ -64,7 +67,7 @@ public class FizzBuzzTest
         String input = "3";
 
         // when
-        String result = fizzBuzz.handle(input);
+        String result = applicationRunner.handle(input);
 
         // then
         assertThat(result, is("Fizz"));
@@ -77,7 +80,7 @@ public class FizzBuzzTest
         String input = "6";
 
         // when
-        String result = fizzBuzz.handle(input);
+        String result = applicationRunner.handle(input);
 
         // then
         assertThat(result, is("Fizz"));
@@ -90,7 +93,7 @@ public class FizzBuzzTest
         String input = "5";
 
         // when
-        String result = fizzBuzz.handle(input);
+        String result = applicationRunner.handle(input);
 
         // then
         assertThat(result, is("Buzz"));
@@ -103,7 +106,7 @@ public class FizzBuzzTest
         String input = "10";
 
         // when
-        String result = fizzBuzz.handle(input);
+        String result = applicationRunner.handle(input);
 
         // then
         assertThat(result, is("Buzz"));
@@ -116,7 +119,7 @@ public class FizzBuzzTest
         String input = "15";
 
         //when
-        String result = fizzBuzz.handle(input);
+        String result = applicationRunner.handle(input);
 
         // then
         assertThat(result, is("FizzBuzz"));
@@ -129,7 +132,7 @@ public class FizzBuzzTest
         String input = "30";
 
         // when
-        String result = fizzBuzz.handle(input);
+        String result = applicationRunner.handle(input);
 
         // then
         assertThat(result, is("FizzBuzz"));
@@ -142,7 +145,7 @@ public class FizzBuzzTest
         thrown.expect(NumberNotBiggerThanZeroException.class);
 
         // when
-        fizzBuzz.handle("0");
+        applicationRunner.handle("0");
 
     }
 
@@ -152,17 +155,17 @@ public class FizzBuzzTest
         thrown.expect(NumberNotBiggerThanZeroException.class);
 
         // when
-        fizzBuzz.handle("-1");
+        applicationRunner.handle("-1");
 
     }
 
     @Test
-    public void should_throw_exception_if_input_is_not_digtal() throws Throwable
+    public void should_throw_exception_if_input_is_not_digital() throws Throwable
     {
         thrown.expect(NumberIsNotDigitalException.class);
 
         // when
-        fizzBuzz.handle("a");
+        applicationRunner.handle("a");
     }
 
     @Test
@@ -171,7 +174,7 @@ public class FizzBuzzTest
         thrown.expect(NumberShouldSmallerThanHundredException.class);
 
         //when
-        fizzBuzz.handle("101");
+        applicationRunner.handle("101");
 
     }
 }
