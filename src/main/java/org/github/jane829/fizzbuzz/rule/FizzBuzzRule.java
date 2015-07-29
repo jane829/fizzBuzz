@@ -1,5 +1,8 @@
 package org.github.jane829.fizzbuzz.rule;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class FizzBuzzRule extends Rule
 {
     private static final String FIZZ_BUZZ = "FizzBuzz";

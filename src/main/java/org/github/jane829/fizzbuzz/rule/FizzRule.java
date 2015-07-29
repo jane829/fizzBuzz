@@ -1,5 +1,8 @@
 package org.github.jane829.fizzbuzz.rule;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class FizzRule extends Rule
 {
     public static final int FIZZ_FACTOR = 3;

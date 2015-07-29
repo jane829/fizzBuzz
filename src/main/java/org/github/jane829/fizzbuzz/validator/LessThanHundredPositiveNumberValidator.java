@@ -3,9 +3,11 @@ package org.github.jane829.fizzbuzz.validator;
 import org.github.jane829.fizzbuzz.exception.NumberInvalidException;
 import org.github.jane829.fizzbuzz.exception.NumberIsNotDigitalException;
 import org.github.jane829.fizzbuzz.exception.NumberShouldSmallerThanHundredException;
+import org.springframework.stereotype.Component;
 
 import static java.lang.Integer.parseInt;
 
+@Component
 public class LessThanHundredPositiveNumberValidator extends NumberValidator
 {
     @Override
